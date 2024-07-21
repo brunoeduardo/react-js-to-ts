@@ -2,10 +2,17 @@ import { useState } from 'react';
 import Formulario from './componentes/Formulario';
 import Time from './componentes/Time';
 import Banner from './componentes/Banner'
+import { IColaborador } from './shared/interfaces/iColaborador';
+
+interface Times {
+  nome: string
+  corPrimaria: string
+  corSecundaria: string
+}
 
 function App() {
 
-  const times = [
+  const times: Times[] = [
     {
       nome: 'Programação',
       corPrimaria: '#57C278',
@@ -43,25 +50,24 @@ function App() {
     }
   ]
 
-  const [colaboradores, setColaboradores] = useState([])
+  const [colaboradores, setColaboradores] = useState<IColaborador[]>([])
 
-  const aoNovoColaboradorAdicionado = (colaborador) => {
+  const aoNovoColaboradorAdicionado = (colaborador: IColaborador) => {
     setColaboradores([...colaboradores, colaborador])
   }
 
   return (
     <div className="App">
       <Banner imgSrc='/imagens/banner.png' imgAlt='O banner principal da página do Organo' />
-      <Formulario times={times.map(time => time.nome)} aoColaboradorCadastrado={colaborador => aoNovoColaboradorAdicionado(colaborador)}/>
+      <Formulario times={times.map(time => time.nome)} aoColaboradorCadastrado={colaborador => aoNovoColaboradorAdicionado(colaborador)} />
 
-      {times.map(time => <Time 
-        key={time.nome} 
-        nome={time.nome} 
-        corPrimaria={time.corPrimaria} 
-        corSecundaria={time.corSecundaria} 
+      {times.map(time => <Time
+        key={time.nome}
+        nome={time.nome}
+        corPrimaria={time.corPrimaria}
+        corSecundaria={time.corSecundaria}
         colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
-      />)}   
-
+      />)}
     </div>
   );
 }

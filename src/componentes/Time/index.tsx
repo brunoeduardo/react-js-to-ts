@@ -23,7 +23,7 @@ const Time = ({ corPrimaria, corSecundaria, colaboradores, nome }: TimeProps) =>
                 {colaboradores.map(colaborador => <Colaborador corDeFundo={corPrimaria} key={colaborador.nome} nome={colaborador.nome} cargo={colaborador.cargo} imagem={colaborador.imagem} />)}
             </div>
         </section>
-            : ''
+            : <></>
     )
 }
 
